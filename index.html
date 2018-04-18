@@ -19,19 +19,19 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="#"><img src="favicon.ico" </a>
         </div>
     </nav>
 
     <div class="container">
 
-        <form action="" method="post">
+        <form action="/" method="post" enctype="multipart/form-data">
 
             <div class="input-group mt-5 mb-5">
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-secondary" type="button"><i class="fas fa-globe"></i></button>
                 </div>
-                <select class="custom-select" title="Select market">
+                <select id="shop" class="custom-select" title="Select market">
                     <option selected>Sélectionnez votre magasin...</option>
                     <option value="1">Orléans</option>
                     <option value="2">Tours</option>
@@ -46,6 +46,9 @@
                     </label>
                 </div>
                 <input id="photo" type="file" name="photo" accept="image/*" capture />
+                <div id="thumb">
+
+                </div>
             </div>
 
             <div class="form-group mb-5">
@@ -61,10 +64,9 @@
 
             </div>
 
-            <button type="submit" class="btn btn-outline-secondary btn-block">Envoyer</button>
+            <button id="submit" type="submit" class="btn btn-outline-secondary btn-block">Envoyer</button>
 
         </form>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
