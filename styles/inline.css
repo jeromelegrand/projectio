@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Brandon Text Regular';
-    src: url("../fonts/BrandonTextRegular.otf") format('otf');
+    src: url('../fonts/BrandonTextRegular.otf') format('otf');
 }
 
 * {
