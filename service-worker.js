@@ -15,10 +15,13 @@
 const dataCacheName = 'projetIoData-v1';
 const cacheName = 'projetIo';
 const filesToCache = [
-  '/',
-  '/index.html',
-  '/scripts/app.js',
-  '/styles/inline.css',
+    '/',
+    '/index.html',
+    '/scripts/app.js',
+    '/styles/inline.css',
+    'https://code.jquery.com/jquery-3.3.1.slim.min.js',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js',
+    'https://use.fontawesome.com/releases/v5.0.10/js/all.js',
 ];
 
 self.addEventListener('install', function(e) {

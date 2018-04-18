@@ -49,14 +49,16 @@
             </div>
 
             <div class="form-group mb-5">
-                <input type="text" class="form-control" placeholder="Votre nom...">
+                <input id="name" type="text" class="form-control" placeholder="Votre nom...">
             </div>
 
             <div class="form-group mb-5">
-                <textarea class="form-control" name="message" id="message" rows="3" placeholder="Votre message..."></textarea>
+                <textarea id="message" class="form-control" name="message" id="message" rows="3" placeholder="Votre message..."></textarea>
                 <small class="form-text text-muted">
                     Les champs Nom et Message ne peuvent pas excéder 200 caractères à eux deux.
+                    <p id="counter">0 caractères / 200</p>
                 </small>
+
             </div>
 
             <button type="submit" class="btn btn-outline-secondary btn-block">Envoyer</button>
