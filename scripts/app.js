@@ -2,7 +2,7 @@
     'use strict';
 
     let totalLength = 0;
-    let photo;
+    let photo = null;
 
     $('#name').keyup(function (e) {
         totalLength = $(this).val().length + $('#message').val().length;
@@ -62,7 +62,10 @@
 
         doc.text(name, 10, 10);
         doc.text(message, 10, 40);
-        doc.addImage(photo, 'JPEG', 10, 60, 50, 50)
+        if (photo != null) {
+            doc.addImage(photo, 'JPEG', 10, 60, 50, 50);
+        }
+
         doc.save('CR.pdf');
 
     });
