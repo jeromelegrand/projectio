@@ -97,7 +97,8 @@
             doc.addImage(photo, 'JPEG', 10, 60, 50, 50);
         }
         doc.save('CR.pdf');
-
+        document.getElementById("form").reset();
+        $("#thumb").empty();
     });
 
     if ('serviceWorker' in navigator) {
