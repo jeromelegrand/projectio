@@ -58,7 +58,11 @@
         let name = $('#name').val();
         let message = $('#message').val();
 
-        console.log(photo);
+        let doc = new jsPDF();
+
+        doc.text(name, 10, 10);
+        doc.text(message, 10, 40);
+        doc.save('CR.pdf');
 
     });
 

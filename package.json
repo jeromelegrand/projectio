@@ -1,0 +1,22 @@
+{
+  "name": "projectio",
+  "version": "1.0.0",
+  "description": "PWA permettant de prendre une photo et de générer un document PDF à partir des information du formulaire",
+  "main": "service-worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeromelegrand/projectio.git"
+  },
+  "author": "Jérôme LEGRAND, Julien ALEXANDRE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeromelegrand/projectio/issues"
+  },
+  "homepage": "https://github.com/jeromelegrand/projectio#readme",
+  "dependencies": {
+    "jspdf": "^1.3.5"
+  }
+}
