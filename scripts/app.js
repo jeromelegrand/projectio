@@ -101,6 +101,49 @@
         $("#thumb").empty();
     });
 
+    function distanceTo(gpsPosition, gpsCities)
+    {
+        let results = [];
+
+        let lat1 = gpsPosition[0];
+        let long1 = gpsPosition[1];
+
+        for (let city in gpsCities) {
+            let position = gpsCities[city];
+
+            let lat2 = position[0];
+            let long2 = position[1];
+
+            let lat1ToRadian = Math.PI * lat1/180;
+            let lat2ToRadian = Math.PI * lat2/180;
+
+            let theta = long1 - long2;
+            let thetaToRadian = Math.PI * theta/180;
+
+            let range = Math.sin(lat1ToRadian) * Math.sin(lat2ToRadian) + Math.cos(lat1ToRadian) * Math.cos(lat2ToRadian) * Math.cos(thetaToRadian);
+            range = Math.acos(range);
+            range = range * 180/Math.PI;
+            range = range * 60 * 1.1515;
+
+            range = range * 1.609344; // Distance en km
+
+            results.push([city, range]);
+        }
+
+        let shortest = 0;
+        let citySelect;
+
+        for (let index in results) {
+            let rows = results[index];
+            if (rows[1] <= shortest || shortest === 0) {
+                shortest = rows[1];
+                citySelect = rows[0];
+            }
+        }
+
+        return citySelect;
+    }
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
             .register('./service-worker.js')
@@ -108,47 +151,7 @@
                 console.log('Service Worker Registered');
             });
     }
+
 })();
 
-function distanceTo(gpsPosition, gpsCities)
-{
-    let results = [];
 
-    let lat1 = gpsPosition[0];
-    let long1 = gpsPosition[1];
-
-    for (let city in gpsCities) {
-        let position = gpsCities[city];
-
-        let lat2 = position[0];
-        let long2 = position[1];
-
-        let lat1ToRadian = Math.PI * lat1/180;
-        let lat2ToRadian = Math.PI * lat2/180;
-
-        let theta = long1 - long2;
-        let thetaToRadian = Math.PI * theta/180;
-
-        let range = Math.sin(lat1ToRadian) * Math.sin(lat2ToRadian) + Math.cos(lat1ToRadian) * Math.cos(lat2ToRadian) * Math.cos(thetaToRadian);
-        range = Math.acos(range);
-        range = range * 180/Math.PI;
-        range = range * 60 * 1.1515;
-
-        range = range * 1.609344; // Distance en km
-
-        results.push([city, range]);
-    }
-
-    let shortest = 0;
-    let citySelect;
-
-    for (let index in results) {
-        let rows = results[index];
-        if (rows[1] <= shortest || shortest === 0) {
-            shortest = rows[1];
-            citySelect = rows[0];
-        }
-    }
-
-    return citySelect;
-}
