@@ -2,7 +2,7 @@
     'use strict';
 
     let totalLength = 0;
-    let photo;
+    let photo = null;
     let gpsCities = {
         'Orleans' : ['47.9167', '1.9'],
         'Tours' : ['47.3833', '0.6833'],
@@ -13,10 +13,7 @@
         let position = $('#position');
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(function (location) {
-                let gpsPositions = [
-                    location.coords.latitude,
-                    location.coords.longitude,
-                ];
+                let gpsPositions = [location.coords.latitude, location.coords.longitude];
 
                 let city = distanceTo(gpsPositions, gpsCities);
 
@@ -60,12 +57,12 @@
     //affichage de la miniature sur sélection de la photo
     $('#photo').change(function (e) {
         let f = e.target.files[0];
-        photo = f;
         let reader = new FileReader();
         reader.onload = (function (file) {
             return function (e) {
                 let span = document.createElement('span');
-                span.innerHTML = '<img class="img-fluid" src="' + e.target.result + '">';
+                photo = e.target.result;
+                span.innerHTML = '<img class="img-fluid" src="' + photo + '">';
 
                 //suppression de la dernière image si elle existe
                 if ($('.img-fluid').length)
@@ -93,10 +90,13 @@
         let message = $('#message').val();
 
         let doc = new jsPDF();
-
         doc.text(name, 10, 10);
         doc.text(shop, 10, 20);
         doc.text(message, 10, 30);
+        doc.text(message, 10, 40);
+        if (photo != null) {
+            doc.addImage(photo, 'JPEG', 10, 60, 50, 50);
+        }
         doc.save('CR.pdf');
 
     });
