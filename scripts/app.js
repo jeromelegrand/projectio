@@ -93,7 +93,6 @@
         doc.text(name, 10, 10);
         doc.text(shop, 10, 20);
         doc.text(message, 10, 30);
-        doc.text(message, 10, 40);
         if (photo != null) {
             doc.addImage(photo, 'JPEG', 10, 60, 50, 50);
         }
