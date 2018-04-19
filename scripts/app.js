@@ -28,7 +28,7 @@
         }
     });
 
-    $('#name').keyup(function (e) {
+    document.getElementById('name').onchange = function (e) {
         totalLength = $(this).val().length + $('#message').val().length;
         if (totalLength > 200) {
             let name = $(this).val();
@@ -39,9 +39,9 @@
         }
         let counterMessage = totalLength + ' caractère(s) / 200';
         $('#counter').text(counterMessage);
-    });
+    };
 
-    $('#message').keyup(function (e) {
+    document.getElementById('message').onchange = function (e) {
         totalLength = $('#name').val().length + $(this).val().length;;
         if (totalLength > 200) {
             let message = $(this).val();
@@ -52,7 +52,7 @@
         }
         let counterMessage = totalLength + ' caractère(s) / 200';
         $('#counter').text(counterMessage);
-    });
+    };
 
     //affichage de la miniature sur sélection de la photo
     $('#photo').change(function (e) {
