@@ -3,6 +3,33 @@
 
     let totalLength = 0;
     let photo;
+    let gpsCities = {
+        'Orleans' : ['47.9167', '1.9'],
+        'Tours' : ['47.3833', '0.6833'],
+        'Reims' : ['49.25', '4.0333'],
+    };
+
+    $('#location').click(function () {
+        let position = $('#position');
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(function (location) {
+                let gpsPositions = [
+                    location.coords.latitude,
+                    location.coords.longitude,
+                ];
+
+                let city = distanceTo(gpsPositions, gpsCities);
+
+                $('#shop option').each(function () {
+                    if ( $(this).val() === city) {
+                        $(this).attr('selected', 'selected');
+                    }
+                });
+            });
+        } else {
+            position.text('Geolocation API not supported.');
+        }
+    });
 
     $('#name').keyup(function (e) {
         totalLength = $(this).val().length + $('#message').val().length;
@@ -55,13 +82,21 @@
     $('#submit').click(function (e) {
         e.preventDefault();
         let shop = $('#shop').val();
+        if (shop === '1') {
+            shop = 'Orléans';
+        } else if (shop === '2') {
+            shop = 'Tours';
+        } else if (shop === '3') {
+            shop = 'Reims';
+        }
         let name = $('#name').val();
         let message = $('#message').val();
 
         let doc = new jsPDF();
 
         doc.text(name, 10, 10);
-        doc.text(message, 10, 40);
+        doc.text(shop, 10, 20);
+        doc.text(message, 10, 30);
         doc.save('CR.pdf');
 
     });
@@ -74,3 +109,46 @@
             });
     }
 })();
+
+function distanceTo(gpsPosition, gpsCities)
+{
+    let results = [];
+
+    let lat1 = gpsPosition[0];
+    let long1 = gpsPosition[1];
+
+    for (let city in gpsCities) {
+        let position = gpsCities[city];
+
+        let lat2 = position[0];
+        let long2 = position[1];
+
+        let lat1ToRadian = Math.PI * lat1/180;
+        let lat2ToRadian = Math.PI * lat2/180;
+
+        let theta = long1 - long2;
+        let thetaToRadian = Math.PI * theta/180;
+
+        let range = Math.sin(lat1ToRadian) * Math.sin(lat2ToRadian) + Math.cos(lat1ToRadian) * Math.cos(lat2ToRadian) * Math.cos(thetaToRadian);
+        range = Math.acos(range);
+        range = range * 180/Math.PI;
+        range = range * 60 * 1.1515;
+
+        range = range * 1.609344; // Distance en km
+
+        results.push([city, range]);
+    }
+
+    let shortest = 0;
+    let citySelect;
+
+    for (let index in results) {
+        let rows = results[index];
+        if (rows[1] <= shortest || shortest === 0) {
+            shortest = rows[1];
+            citySelect = rows[0];
+        }
+    }
+
+    return citySelect;
+}
