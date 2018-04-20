@@ -11,3 +11,12 @@ body {
     padding-top: 5rem;
     font-family: 'Brandon Text Regular', sans-serif;
 }
+
+.bg-light {
+    background-color: #2196F3 !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #2196F3;
+    border-color: #2196F3;
+}

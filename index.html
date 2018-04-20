@@ -7,14 +7,15 @@
     <title>PWA Projet IO</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/inline.css">
+    <link rel="preload" href="https://unpkg.com/jspdf@latest/dist/jspdf.min.js" as="script">
     <link rel="manifest" href="/manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Weather PWA">
     <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
     <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#2F3BA2">
-    <meta name="theme-color" content="#2F3BA2">
+    <meta name="msapplication-TileColor" content="#2196F3">
+    <meta name="theme-color" content="#2196F3">
 </head>
 <body>
 
@@ -41,11 +42,8 @@
             </div>
 
             <div class="input-group mb-5">
-                <div class="input-group-prepend">
-                    <label for="photo">
-                        <button class="btn btn-outline-secondary" type="button" aria-label="take picture"><i class="fas fa-camera"></i></button>
-                    </label>
-                </div>
+
+                <button for="photo" class="label-file" onclick="document.getElementById('photo').click()"><i class="fas fa-camera"></i></button>
                 <input id="photo" type="file" name="photo" accept="image/*" capture />
                 <div id="thumb">
 
@@ -65,7 +63,7 @@
 
             </div>
 
-            <button id="submit" type="submit" class="btn btn-outline-secondary btn-block">Envoyer</button>
+            <button id="submit" type="submit" class="btn btn-outline-secondary btn-block mb-5">Envoyer</button>
 
         </form>
     </div>
