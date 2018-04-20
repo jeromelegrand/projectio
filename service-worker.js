@@ -1,4 +1,4 @@
-const dataCacheName = 'projetIoData-v1';
+const dataCacheName = 'projetIoData-v2';
 const cacheName = 'projetIo';
 const filesToCache = [
     '/',
