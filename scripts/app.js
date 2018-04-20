@@ -11,7 +11,6 @@
     };
 
     $('#location').click(function () {
-        let position = $('#position');
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(function (location) {
                 let gpsPositions = [location.coords.latitude, location.coords.longitude];
@@ -29,7 +28,7 @@
         }
     });
 
-    document.getElementById('name').onchange = function (e) {
+    document.getElementById('name').onkeyup = function (e) {
         totalLength = $(this).val().length + $('#message').val().length;
         if (totalLength > 200) {
             let name = $(this).val();
@@ -42,8 +41,8 @@
         $('#counter').text(counterMessage);
     };
 
-    document.getElementById('message').onchange = function (e) {
-        totalLength = $('#name').val().length + $(this).val().length;;
+    document.getElementById('message').onkeyup = function (e) {
+        totalLength = $('#name').val().length + $(this).val().length;
         if (totalLength > 200) {
             let message = $(this).val();
             let length = 200 - $('#name').val().length;
@@ -93,9 +92,10 @@
         // Génération du PDF
         let doc = new jsPDF();
         doc.setFont('BrandonTextRegular');
-        doc.text('Nom du commercial : ' + name, 10, 10);
-        doc.text('Magasin : ' + shop, 10, 20);
-        doc.text('Message : ' + message, 10, 30);
+        doc.text('Document généré le : ' + new Date(), 10, 10);
+        doc.text('Nom du commercial : ' + name, 10, 20);
+        doc.text('Magasin : ' + shop, 10, 30);
+        doc.text('Message : ' + message, 10, 40);
         if (photo != null) {
             doc.addImage(photo, 'JPEG', 10, 60, 100, 100);
         }
