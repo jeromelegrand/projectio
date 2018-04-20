@@ -29,7 +29,7 @@
         }
     });
 
-    document.getElementById('name').onchange = function (e) {
+    document.getElementById('name').onkeyup = function (e) {
         totalLength = $(this).val().length + $('#message').val().length;
         if (totalLength > 200) {
             let name = $(this).val();
@@ -42,7 +42,7 @@
         $('#counter').text(counterMessage);
     };
 
-    document.getElementById('message').onchange = function (e) {
+    document.getElementById('message').onkeyup = function (e) {
         totalLength = $('#name').val().length + $(this).val().length;;
         if (totalLength > 200) {
             let message = $(this).val();
