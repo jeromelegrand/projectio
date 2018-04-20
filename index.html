@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,12 +16,18 @@
     <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
     <meta name="msapplication-TileColor" content="#2196F3">
     <meta name="theme-color" content="#2196F3">
+    <meta name="Description"
+          content="Application PWA permettant à un commercial de prendre une photo d'un rayon de magasin,
+          de se géolocaliser puis de générer un PDF avec les informations.">
 </head>
 <body>
 
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><img src="favicon.ico"></a>
+            <a class="navbar-brand" href="#">
+                <span class="sr-only">Accueil</span>
+                <img src="favicon.ico" alt="Logo application">
+            </a>
         </div>
     </nav>
 
@@ -31,9 +37,12 @@
 
             <div class="input-group mt-5 mb-5">
                 <div class="input-group-prepend">
-                    <button id="location" class="btn btn-outline-secondary" type="button"><i class="fas fa-globe"></i></button>
+                    <button id="location" class="btn btn-outline-secondary" type="button">
+                        <span class="sr-only">Géolocalisation</span>
+                        <i class="fas fa-globe"></i>
+                    </button>
                 </div>
-                <select id="shop" class="custom-select" title="Select market">
+                <select id="shop" class="custom-select" title="Select market" aria-label="Sélection du magasin">
                     <option>Sélectionnez votre magasin...</option>
                     <option value="Orleans">Orléans</option>
                     <option value="Tours">Tours</option>
@@ -42,18 +51,18 @@
             </div>
 
             <div class="input-group mb-5">
-                <input id="photo" type="file" name="photo" accept="image/*" capture />
+                <input id="photo" type="file" name="photo" accept="image/*" aria-label="Prendre une photo" capture />
                 <div id="thumb" class="mt-5">
 
                 </div>
             </div>
 
             <div class="form-group mb-5">
-                <input id="name" type="text" class="form-control" placeholder="Votre nom...">
+                <input id="name" type="text" class="form-control" placeholder="Votre nom..." aria-label="Votre nom">
             </div>
 
             <div class="form-group mb-5">
-                <textarea id="message" class="form-control" name="message" id="message" rows="3" placeholder="Votre message..."></textarea>
+                <textarea id="message" class="form-control" name="message" id="message" rows="3" placeholder="Votre message..." aria-label="Votre message"></textarea>
                 <small class="form-text text-muted">
                     Les champs Nom et Message ne peuvent pas excéder 200 caractères à eux deux.
                     <p id="counter">0 caractères / 200</p>
