@@ -16,7 +16,6 @@ const filesToCache = [
     '/node_modules/adler32cs/adler32cs.js',
     '/node_modules/cf-blob.js/Blob.js',
     '/node_modules/file-saver/FileSaver.js',
-    'https://unpkg.com/jspdf@latest/dist/jspdf.min.js',
 ];
 
 self.addEventListener('install', function(e) {

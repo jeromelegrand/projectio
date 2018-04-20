@@ -2,6 +2,7 @@
     'use strict';
 
     let totalLength = 0;
+    let counterMessage = '';
     let photo = null;
     let gpsCities = {
         'Orleans' : ['47.9167', '1.9'],
@@ -37,7 +38,7 @@
             totalLength = totalLength - 1;
             $(this).val(name);
         }
-        let counterMessage = totalLength + ' caractère(s) / 200';
+        counterMessage = totalLength + ' caractère(s) / 200';
         $('#counter').text(counterMessage);
     };
 
@@ -50,7 +51,7 @@
             totalLength = totalLength - 1;
             $(this).val(message);
         }
-        let counterMessage = totalLength + ' caractère(s) / 200';
+        counterMessage = totalLength + ' caractère(s) / 200';
         $('#counter').text(counterMessage);
     };
 
@@ -89,15 +90,21 @@
         let name = $('#name').val();
         let message = $('#message').val();
 
+        // Génération du PDF
         let doc = new jsPDF();
-        doc.text(name, 10, 10);
-        doc.text(shop, 10, 20);
-        doc.text(message, 10, 30);
+        doc.setFont('BrandonTextRegular');
+        doc.text('Nom du commercial : ' + name, 10, 10);
+        doc.text('Magasin : ' + shop, 10, 20);
+        doc.text('Message : ' + message, 10, 30);
         if (photo != null) {
-            doc.addImage(photo, 'JPEG', 10, 60, 50, 50);
+            doc.addImage(photo, 'JPEG', 10, 60, 100, 100);
         }
         doc.save('CR.pdf');
+        // Fin de génération PDF
+
         document.getElementById("form").reset();
+        counterMessage = '0 caractère(s) / 200';
+        $('#counter').text(counterMessage);
         $("#thumb").empty();
     });
 
@@ -108,6 +115,7 @@
                 console.log('Service Worker Registered');
             });
     }
+
 })();
 
 function distanceTo(gpsPosition, gpsCities)
@@ -152,3 +160,5 @@ function distanceTo(gpsPosition, gpsCities)
 
     return citySelect;
 }
+
+
