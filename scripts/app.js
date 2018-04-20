@@ -93,9 +93,10 @@
         // Génération du PDF
         let doc = new jsPDF();
         doc.setFont('BrandonTextRegular');
-        doc.text('Nom du commercial : ' + name, 10, 10);
-        doc.text('Magasin : ' + shop, 10, 20);
-        doc.text('Message : ' + message, 10, 30);
+        doc.text('Document généré le : ' + new Date(), 10, 10);
+        doc.text('Nom du commercial : ' + name, 10, 20);
+        doc.text('Magasin : ' + shop, 10, 30);
+        doc.text('Message : ' + message, 10, 40);
         if (photo != null) {
             doc.addImage(photo, 'JPEG', 10, 60, 100, 100);
         }
