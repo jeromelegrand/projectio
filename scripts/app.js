@@ -89,6 +89,7 @@
         let name = $('#name').val();
         let message = $('#message').val();
 
+        // Génération du PDF
         let doc = new jsPDF();
         doc.text(name, 10, 10);
         doc.text(shop, 10, 20);
@@ -97,6 +98,8 @@
             doc.addImage(photo, 'JPEG', 10, 60, 50, 50);
         }
         doc.save('CR.pdf');
+        // Fin de génération PDF
+
         document.getElementById("form").reset();
         $("#thumb").empty();
     });
