@@ -11,3 +11,4 @@ Il est possible de générer un document hors-connexion.
 ## Installation
 1. Cloner le dépôt : https://github.com/jeromelegrand/projectio/
 2. Installer les dépendances : `npm install`
+3. Ouvrir le ficher `index.html` dans le navigateur (pas besoin de serveur)
