@@ -4,7 +4,7 @@
     let totalLength = 0;
     let counterMessage = '';
     let photo = null;
-    let gpsCities = {
+    let gpsCities = { // Coordonnées des magasins
         'Orleans' : ['47.9167', '1.9'],
         'Tours' : ['47.3833', '0.6833'],
         'Reims' : ['49.25', '4.0333'],
@@ -14,10 +14,11 @@
         let position = $('#position');
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(function (location) {
+                // Coordonnées de l'utilisateur
                 let gpsPositions = [location.coords.latitude, location.coords.longitude];
-
+                // Calcul de la distance entre les coordonnées de l'utilisateur et les coordonnées des magasins
                 let city = distanceTo(gpsPositions, gpsCities);
-
+                // Affichage du magasin le plus proche dans la liste déroulante
                 $('#shop option').each(function () {
                     if ( $(this).val() === city) {
                         $(this).attr('selected', 'selected');
@@ -29,6 +30,7 @@
         }
     });
 
+    /* Gestion du compteur de caractères */
     document.getElementById('name').onkeyup = function (e) {
         totalLength = $(this).val().length + $('#message').val().length;
         if (totalLength > 200) {
@@ -54,8 +56,9 @@
         counterMessage = totalLength + ' caractère(s) / 200';
         $('#counter').text(counterMessage);
     };
+    /* Fin de gestion du compteur de caractères */
 
-    //affichage de la miniature sur sélection de la photo
+    // Affichage de la photo miniature sur sélection
     $('#photo').change(function (e) {
         let f = e.target.files[0];
         let reader = new FileReader();
@@ -65,7 +68,7 @@
                 photo = e.target.result;
                 span.innerHTML = '<img class="img-fluid" src="' + photo + '">';
 
-                //suppression de la dernière image si elle existe
+                // Suppression de la dernière image si elle existe
                 if ($('.img-fluid').length)
                 {
                     $('.img-fluid').remove();
@@ -77,6 +80,7 @@
         reader.readAsDataURL(f);
     });
 
+    // Envoie du formulaire et génération du PDF
     $('#submit').click(function (e) {
         e.preventDefault();
         let shop = $('#shop').val();
@@ -90,7 +94,7 @@
         let name = $('#name').val();
         let message = $('#message').val();
 
-        // Génération du PDF
+        /* Génération du PDF */
         let doc = new jsPDF();
         doc.setFont('BrandonTextRegular');
         doc.text('Document généré le : ' + new Date(), 10, 10);
@@ -101,14 +105,17 @@
             doc.addImage(photo, 'JPEG', 10, 60, 100, 100);
         }
         doc.save('CR.pdf');
-        // Fin de génération PDF
+        /* Fin de génération PDF */
 
+        // Réinitialisation du compteur de caractère
         document.getElementById("form").reset();
         counterMessage = '0 caractère(s) / 200';
         $('#counter').text(counterMessage);
+        // Suppression de la photo miniature dans la vue
         $("#thumb").empty();
     });
 
+    // Appel au Service Worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
             .register('./service-worker.js')
@@ -119,6 +126,7 @@
 
 })();
 
+// Fonction de calcul de distance
 function distanceTo(gpsPosition, gpsCities)
 {
     let results = [];
